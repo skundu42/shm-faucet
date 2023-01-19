@@ -1,7 +1,5 @@
 ### eth-faucet
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/MetaMask/eth-faucet.svg?token=126240abfcbf915f71b337dfc332d4ad63e362166827d61078593e2ae20aff36&ts=1501793671323)](https://greenkeeper.io/)
-
 configure:
 create a `config.js` with private key and rpc endpoint.
 first namespace is used in `docker-compose.yml`.
@@ -28,8 +26,8 @@ Will not work without a `config.js` file. You can run it on a local testnet like
 ```javascript
 module.exports = {
   'ropsten': {
-    'privateKey': '0xe2e5b850dd3974c6d296ccd69556fc2dc57484206b3411e5e3de1fc54f5afcf8',
-    'rpcOrigin': 'http://127.0.0.1:8545'
+    'privateKey': 'Insert Faucet Private Key',
+    'rpcOrigin': 'Insert RPC URL'
   }
 }
 ```
