@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: faucet-liberty
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "https"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "liberty-faucet"
+spec:
+  ports:
+  - port: 80
+    targetPort: 9000
+  selector:
+    app: faucet-liberty
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: faucet-liberty
+spec:
+  selector:
+    matchLabels:
+      app: faucet-liberty
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: faucet-liberty
+    spec:
+      containers:
+      - name: faucet-liberty
+        image: <IMAGE>
+        imagePullSecrets:
+        - name: registry-metamask
+        ports:
+        - containerPort: 9000
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: faucet-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rate-limiting
+    nginx.ingress.kubernetes.io/limit-connections: "1"
+    nginx.ingress.kubernetes.io/limit-rps: "1"
+    nginx.ingress.kubernetes.io/limit-rpm: "5"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "1"
+spec:
+  tls:
+  - hosts:
+    - faucet.metamask.io
+    secretName: faucet-tls
+  rules:
+  - host: faucet.metamask.io
+    http:
+      paths:
+      - backend:
+          serviceName: faucet-ropsten
+          servicePort: 80
