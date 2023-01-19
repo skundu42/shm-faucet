@@ -1,4 +1,4 @@
-### eth-faucet
+### SHM-Faucet
 
 configure:
 create a `config.js` with private key and rpc endpoint.
@@ -37,3 +37,6 @@ the faucet regularly restarts to ensure its in a good state
 
 ### deploy:
 continuous deployment is setup via github actions and kubernetes
+
+
+This repo has been dereived from [MetamaskFaucet](https://github.com/MetaMask/eth-faucet).
