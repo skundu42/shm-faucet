@@ -1,5 +1,7 @@
 ### SHM-Faucet
+Build your own SHM faucet
 
+### Configure
 configure:
 create a `config.js` with private key and rpc endpoint.
 first namespace is used in `docker-compose.yml`.
@@ -9,11 +11,7 @@ cp config.js.example config.js
 
 Or pass the environment variable `FAUCET_CONFIG_LOCATION` to the build step.
 
-### if you need more eth, dont build a spam bot
-
-contact me or the Ethereum Foundation
-
-### development:
+### Development:
 
 Running `yarn setup` will install and prepare dependencies.
 
@@ -25,7 +23,7 @@ Will not work without a `config.js` file. You can run it on a local testnet like
 
 ```javascript
 module.exports = {
-  'ropsten': {
+  'liberty': {
     'privateKey': 'Insert Faucet Private Key',
     'rpcOrigin': 'Insert RPC URL'
   }
